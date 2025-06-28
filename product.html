@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - QuickDeal</title>
+    <link rel="stylesheet" href="css/product.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+   :root {
+    --primary-color: #2874f0;
+    --primary-dark: #1a5dc5;
+    --secondary-color: #fb641b;
+    --success-color: #388e3c;
+    --warning-color: #ff9f00;
+    --error-color: #ff6161;
+    --text-dark: #212121;
+    --text-medium: #878787;
+    --text-light: #f0f0f0;
+    --bg-light: #f5f5f5;
+    --border-color: #e0e0e0;
+    --accent-color: #ff6161;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.site-header {
+    background: white;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    animation: slideDown 0.5s ease-out;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.logo-icon {
+    font-size: 28px;
+    margin-right: 10px;
+    color: var(--accent-color);
+}
+
+.search-bar {
+    display: flex;
+    flex: 0.6;
+    max-width: 600px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 30px 0 0 30px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(42,90,143,0.2);
+}
+
+.search-bar button {
+    padding: 0 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0 30px 30px 0;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.search-bar button:hover {
+    background: var(--primary-dark);
+}
+
+.user-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-profile, .cart {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 8px 12px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.user-profile:hover, .cart:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.user-profile i, .cart i {
+    font-size: 20px;
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover;
+}
+
+.cart-count {
+    background: var(--accent-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* Navigation styles */
+nav {
+    background: white;
+    border-top: 1px solid #eee;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto;
+}
+
+.nav-links li a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+
+.nav-links li a:hover {
+    color: var(--primary-color);
+}
+
+/* User dropdown styles */
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    width: 200px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 10px 0;
+    display: none;
+    z-index: 100;
+}
+
+.user-profile:hover .user-dropdown {
+    display: block;
+}
+
+.user-dropdown a {
+    display: block;
+    padding: 8px 15px;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.user-dropdown a:hover {
+    background: var(--bg-light);
+    color: var(--primary-color);
+    padding-left: 20px;
+}
+
+.user-dropdown a i {
+    margin-right: 8px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Animation for header */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Product Details Styles */
+.product-details-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.breadcrumbs {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text-medium);
+}
+
+.breadcrumbs a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    text-decoration: underline;
+}
+
+.product-main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.product-gallery {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    position: relative;
+}
+
+.product-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.main-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-light);
+}
+
+.main-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.main-image:hover img {
+    transform: scale(1.05);
+}
+
+.image-zoom {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: 300%;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 10;
+    border: 2px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.thumbnails {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.thumbnails img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.thumbnails img.active {
+    border-color: var(--primary-color);
+}
+
+.thumbnails img:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.product-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.rating-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.rating-badge {
+    background: var(--success-color);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 14px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.rating-count {
+    font-size: 14px;
+    color: var(--text-medium);
+}
+
+.price-section {
+    margin: 20px 0;
+    padding: 15px;
+    background: var(--bg-light);
+    border-radius: 8px;
+}
+
+.current-price {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.original-price {
+    font-size: 18px;
+    color: var(--text-medium);
+    text-decoration: line-through;
+    margin-left: 8px;
+}
+
+.discount {
+    font-size: 16px;
+    color: var(--success-color);
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+.inclusive-tax {
+    font-size: 14px;
+    color: var(--success-color);
+    margin-top: 5px;
+}
+
+.offers-section {
+    margin: 20px 0;
+    padding: 15px 0;
+    border-top: 1px dashed var(--border-color);
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.offers-section h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.offer {
+    display: flex;
+    align-items: flex-start;
+    margin: 8px 0;
+    color: var(--text-dark);
+    font-size: 14px;
+}
+
+.offer i {
+    color: var(--success-color);
+    margin-right: 8px;
+    margin-top: 3px;
+}
+
+.offer a {
+    color: var(--primary-color);
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.offer a:hover {
+    text-decoration: underline;
+}
+
+.delivery-section {
+    margin: 20px 0;
+}
+
+.delivery-option {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.delivery-option input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+    outline: none;
+}
+
+.delivery-option input:focus {
+    border-color: var(--primary-color);
+}
+
+.delivery-option button {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 0 15px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.delivery-option button:hover {
+    background: #e55b16;
+}
+
+.delivery-time {
+    display: flex;
+    align-items: center;
+    color: var(--text-dark);
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.delivery-time i {
+    color: var(--success-color);
+    margin-right: 8px;
+}
+
+.delivery-time.error {
+    color: var(--error-color);
+}
+
+.delivery-time.error i {
+    color: var(--error-color);
+}
+
+.highlights {
+    margin: 20px 0;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
+}
+
+.highlights h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.highlights ul {
+    list-style: none;
+}
+
+.highlights li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.highlights li:before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.btn-add-to-cart, .btn-buy-now {
+    flex: 1;
+    padding: 15px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-add-to-cart {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-add-to-cart:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(40, 116, 240, 0.3);
+}
+
+.btn-buy-now {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+}
+
+.btn-buy-now:hover {
+    background: #e55b16;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(251, 100, 27, 0.3);
+}
+
+.specifications {
+    margin: 30px 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.specifications h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.specifications table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.specifications tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.specifications td {
+    padding: 12px 0;
+}
+
+.specifications td:first-child {
+    color: var(--text-medium);
+    width: 30%;
+}
+
+.reviews-section {
+    margin: 30px 0;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.reviews-section h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.review {
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.review-rating {
+    color: var(--warning-color);
+    margin-right: 10px;
+}
+
+.review-title {
+    font-weight: 500;
+}
+
+.review-author {
+    color: var(--text-medium);
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.review-comment {
+    color: var(--text-dark);
+}
+
+/* Related Products */
+.related-products {
+    margin: 30px 0;
+    padding: 20px 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.related-products h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.related-products-scroller {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--bg-light);
+}
+
+.related-products-scroller::-webkit-scrollbar {
+    height: 6px;
+}
+
+.related-products-scroller::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+.related-products-scroller::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 6px;
+}
+
+.related-product-card {
+    min-width: 220px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.related-product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.related-product-image {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.related-product-info {
+    padding: 15px;
+}
+
+.related-product-name {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    color: var(--text-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.related-product-price {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.related-product-price .current-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.related-product-price .original-price {
+    font-size: 14px;
+    color: var(--text-medium);
+    text-decoration: line-through;
+}
+
+.related-product-rating {
+    color: var(--warning-color);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.related-product-card .btn-add-to-cart {
+    width: 100%;
+    padding: 8px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.related-product-card .btn-add-to-cart:hover {
+    background: var(--primary-dark);
+}
+
+/* Floating cart indicator */
+.floating-cart-indicator {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.floating-cart-indicator:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.floating-cart-indicator .count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #ff4757;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+}
+
+.floating-cart-indicator.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Cart animation */
+.cart-animation {
+    position: absolute;
+    pointer-events: none;
+    z-index: 100;
+    color: var(--primary-color);
+    animation: flyToCart 0.8s forwards;
+    --x: 50px;
+    --y: -50px;
+    --x-end: 100px;
+    --y-end: -100px;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes flyToCart {
+    0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.5) translate(var(--x), var(--y));
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0.3) translate(var(--x-end), var(--y-end));
+        opacity: 0;
+    }
+}
+
+/* Footer Styles */
+footer {
+    background: #2c3e50;
+    color: white;
+    padding: 40px 0 20px;
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+}
+
+.footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-column h3:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--primary-color);
+}
+
+.footer-column p, .footer-column li {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #ecf0f1;
+}
+
+.footer-column a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-column a:hover {
+    color: var(--primary-color);
+}
+
+.footer-column ul {
+    list-style: none;
+}
+
+.footer-column li i {
+    margin-right: 8px;
+    width: 20px;
+    text-align: center;
+}
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s;
+}
+
+.footer-social a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+}
+
+.footer-bottom i {
+    color: var(--error-color);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .header-container {
+        flex-wrap: wrap;
+    }
+    
+    .search-bar {
+        order: 3;
+        flex: 1 100%;
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-actions span, .logo span {
+        display: none;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .product-main {
+        flex-direction: column;
+    }
+    
+    .product-gallery, .product-info {
+        max-width: 100%;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+} 
+</style>
+<body>
+    <!-- Header Section -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shopping-basket logo-icon"></i>
+                <span>QuickDeal</span>
+            </a>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products..." id="productSearch">
+                <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="user-actions">
+                <div class="user-profile" id="userInfo">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User" class="user-avatar">
+                    <span>Guest</span>
+                </div>
+                <div class="cart" id="cartIcon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+            <ul class="nav-links" id="categoryNav">
+                <li><a href="index.html?category=fruits">Fruits</a></li>
+                <li><a href="index.html?category=vegetables">Vegetables</a></li>
+                <li><a href="index.html?category=dairy">Dairy</a></li>
+                <li><a href="index.html?category=bakery">Bakery</a></li>
+                <li><a href="index.html?category=meat">Meat</a></li>
+                <li><a href="index.html?category=beverages">Beverages</a></li>
+                <li><a href="index.html?category=organic">Organic</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="product-details-container">
+        <div class="breadcrumbs">
+            <a href="index.html">Home</a> > 
+            <a href="#" id="productCategory">Category</a> > 
+            <span id="productNameBreadcrumb">Product Name</span>
+        </div>
+
+        <div class="product-main">
+            <div class="product-gallery">
+                <div class="main-image animate__animated animate__fadeIn">
+                    <img id="productMainImage" src="" alt="Product Image">
+                    <div class="image-zoom" id="imageZoom"></div>
+                </div>
+                <div class="thumbnails" id="productThumbnails">
+                    <!-- Thumbnails will be loaded via JavaScript -->
+                </div>
+            </div>
+
+            <div class="product-info">
+                <h1 id="productTitle" class="animate__animated animate__fadeInDown">Product Name</h1>
+                
+                <div class="rating-section">
+                    <span class="rating-badge"><span id="productRating">4.2</span> ★</span>
+                    <span class="rating-count" id="ratingCount">2,378 Ratings & Reviews</span>
+                </div>
+                
+                <div class="price-section animate__animated animate__fadeIn">
+                    <span class="current-price" id="productPrice">₹0.00</span>
+                    <span class="original-price" id="originalPrice"></span>
+                    <span class="discount" id="discountBadge"></span>
+                    <div class="inclusive-tax">Inclusive of all taxes</div>
+                </div>
+
+                <div class="offers-section">
+                    <h3>Available offers</h3>
+                    <div id="productOffers">
+                        <!-- Offers will be loaded via JavaScript -->
+                    </div>
+                </div>
+
+                <div class="delivery-section">
+                    <div class="delivery-option">
+                        <input type="text" placeholder="Enter Delivery Pincode" id="pincodeInput" maxlength="6">
+                        <button id="checkPincode">Check</button>
+                    </div>
+                    <div class="delivery-time" id="deliveryInfo">
+                        <i class="fas fa-truck"></i>
+                        <span>Enter pincode to check delivery availability</span>
+                    </div>
+                </div>
+
+                <div class="highlights animate__animated animate__fadeInUp">
+                    <h3>Highlights</h3>
+                    <ul id="productHighlights">
+                        <!-- Highlights will be loaded via JavaScript -->
+                    </ul>
+                </div>
+
+                <div class="action-buttons animate__animated animate__fadeInUp">
+                    <button class="btn-add-to-cart" id="addToCart">
+                        <i class="fas fa-shopping-cart"></i> ADD TO CART
+                        <span class="cart-animation" id="cartAnimation"></span>
+                    </button>
+                    <button class="btn-buy-now" id="buyNow">
+                        <i class="fas fa-bolt"></i> BUY NOW
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="specifications">
+            <h3>Specifications</h3>
+            <table id="productSpecs">
+                <!-- Specifications will be loaded via JavaScript -->
+            </table>
+        </div>
+
+        <div class="reviews-section">
+            <h3>Customer Reviews</h3>
+            <div id="productReviews">
+                <!-- Reviews will be loaded via JavaScript -->
+            </div>
+        </div>
+
+        <div class="related-products">
+            <h3>Similar Products</h3>
+            <div class="horizontal-scroller" id="relatedProducts">
+                <!-- Related products will be loaded via JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Cart Indicator -->
+    <div class="floating-cart-indicator pulse" id="floatingCart">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="count">0</span>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p>FoodMart is your one-stop shop for fresh groceries and organic products. We deliver quality food right to your doorstep.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="profile.html">My Account</a></li>
+                    <li><a href="profile.html#orders">Order Tracking</a></li>
+                    <li><a href="#" id="viewWishlistFooter">Wishlist</a></li>
+                    <li><a href="#">Returns & Refunds</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Main Street, New York, NY 10001</li>
+                    <li><i class="fas fa-phone"></i> +1 (234) 567-8900</li>
+                    <li><i class="fas fa-envelope"></i> info@foodmart.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 10:00 PM</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 FoodMart. All Rights Reserved. Designed with <i class="fas fa-heart"></i> by FoodMart Team</p>
+        </div>
+    </footer>
+
+    <script src="js/product.js"></script>
+</body>
+</html>

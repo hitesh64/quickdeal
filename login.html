@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Your E-commerce</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/login.css">
+<script src="js/login.js" defer></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    /* Base Styles */
+:root {
+    --primary: #6c5ce7;
+    --primary-dark: #5649c0;
+    --secondary: #fd79a8;
+    --text: #2d3436;
+    --text-light: #636e72;
+    --light: #f5f6fa;
+    --white: #ffffff;
+    --error: #d63031;
+    --success: #00b894;
+    --google: #db4437;
+    --facebook: #4267B2;
+    --twitter: #1DA1F2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--light);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-container {
+    display: flex;
+    max-width: 1000px;
+    width: 100%;
+    background-color: var(--white);
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.login-left, .login-right {
+    flex: 1;
+    padding: 60px;
+}
+
+.login-left {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-container {
+    position: relative;
+    z-index: 2;
+}
+
+.logo-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+.login-left h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.login-left p {
+    opacity: 0.9;
+    font-size: 1rem;
+}
+
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.shape {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.shape.circle {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    right: 15%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.shape.triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 100px solid rgba(255, 255, 255, 0.1);
+    top: 60%;
+    left: 20%;
+    animation: float 6s ease-in-out infinite reverse;
+    border-radius: 0;
+}
+
+.shape.square {
+    width: 80px;
+    height: 80px;
+    bottom: 15%;
+    right: 20%;
+    animation: float 10s ease-in-out infinite;
+    border-radius: 15px;
+}
+
+.login-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-header {
+    margin-bottom: 40px;
+}
+
+.form-header h2 {
+    font-size: 2rem;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+.form-switch {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.form-switch a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.form-switch a:hover {
+    color: var(--primary-dark);
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background-color: transparent;
+    transition: all 0.3s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-bottom-color: var(--primary);
+}
+
+.input-group label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    font-size: 1rem;
+    color: var(--text-light);
+    pointer-events: none;
+    transition: all 0.3s;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+    top: -15px;
+    font-size: 0.8rem;
+    color: var(--primary);
+}
+
+.focus-border {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: all 0.4s;
+}
+
+.input-group input:focus ~ .focus-border {
+    width: 100%;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+}
+
+.remember-me, .agree-terms {
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+}
+
+.remember-me input, .agree-terms input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: var(--light);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 8px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.remember-me:hover input ~ .checkmark,
+.agree-terms:hover input ~ .checkmark {
+    border-color: var(--primary);
+}
+
+.remember-me input:checked ~ .checkmark,
+.agree-terms input:checked ~ .checkmark {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.remember-me input:checked ~ .checkmark:after,
+.agree-terms input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.forgot-password {
+    color: var(--primary);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.forgot-password:hover {
+    color: var(--primary-dark);
+}
+
+.btn-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 15px;
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    overflow: hidden;
+    position: relative;
+}
+
+.btn-login:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+}
+
+.btn-login span {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-login .arrow-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    transition: all 0.3s;
+    position: relative;
+    z-index: 2;
+}
+
+.btn-login:hover .arrow-icon {
+    transform: translateX(5px);
+}
+
+.social-login {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.social-login p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.social-login p:before,
+.social-login p:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.social-login p:before {
+    left: 0;
+}
+
+.social-login p:after {
+    right: 0;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--white);
+    transition: all 0.3s;
+}
+
+.social-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.social-icon.google {
+    background-color: var(--google);
+}
+
+.social-icon.facebook {
+    background-color: var(--facebook);
+}
+
+.social-icon.twitter {
+    background-color: var(--twitter);
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+    
+    .login-left, .login-right {
+        padding: 40px 30px;
+    }
+    
+    .login-left {
+        padding-bottom: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-left, .login-right {
+        padding: 30px 20px;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .forgot-password {
+        margin-left: 26px;
+    }
+}
+/* Keyframe Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes inputAppear {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animation Classes */
+.animate-slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+.animate-input-appear {
+    animation: inputAppear 0.6s ease-out forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Transition Effects */
+.input-group, .btn-login, .social-icon {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+</style>
+
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-left animate-slide-in-left">
+            <div class="logo-container">
+                <svg class="logo-icon" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12,3A4,4 0 0,1 16,7A4,4 0 0,1 12,11A4,4 0 0,1 8,7A4,4 0 0,1 12,3M16,13.54C16,14.6 15.72,17.07 13.81,19.83L13,15L13.94,13.12C13.32,13.05 12.67,13 12,13C11.33,13 10.68,13.05 10.06,13.12L11,15L10.19,19.83C8.28,17.07 8,14.6 8,13.54C5.61,14.24 4,15.5 4,17V21H20V17C20,15.5 18.4,14.24 16,13.54Z" />
+                </svg>
+                <h1>Welcome Back</h1>
+                <p>Login to access your orders, wishlist and more</p>
+            </div>
+            <div class="floating-shapes">
+                <div class="shape circle"></div>
+                <div class="shape triangle"></div>
+                <div class="shape square"></div>
+            </div>
+        </div>
+        
+        <div class="login-right animate-slide-in-right">
+            <form id="loginForm" class="login-form">
+                <div class="form-header">
+                    <h2>Member Login</h2>
+                    <div class="form-switch">
+                        New user? <a href="#" id="switchToRegister">Register</a>
+                    </div>
+                </div>
+                
+                <div class="input-group animate-input-appear" style="--delay: 0.2s">
+                    <input type="email" id="loginEmail" required>
+                    <label for="loginEmail">Email Address</label>
+                    <span class="focus-border"></span>
+                </div>
+                
+                <div class="input-group animate-input-appear" style="--delay: 0.3s">
+                    <input type="password" id="loginPassword" required>
+                    <label for="loginPassword">Password</label>
+                    <span class="focus-border"></span>
+                </div>
+                
+                <div class="form-options animate-input-appear" style="--delay: 0.4s">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="btn-login animate-input-appear" style="--delay: 0.5s">
+                    <span>Login</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+                    </svg>
+                </button>
+                
+                <div class="social-login animate-input-appear" style="--delay: 0.6s">
+                    <p>Or login with</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon google">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.1,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1Z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon facebook">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44,21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="social-icon twitter">
+                            <svg viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </form>
+            
+            <form id="registerForm" class="register-form" style="display: none;">
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <div class="form-switch">
+                        Already a member? <a href="#" id="switchToLogin">Login</a>
+                    </div>
+                </div>
+                
+                <div class="input-group animate-input-appear" style="--delay: 0.2s">
+                    <input type="text" id="firstName" required>
+                    <label for="firstName">First Name</label>
+                    <span class="focus-border"></span>
+                </div>
+                
+                <div class="input-group animate-input-appear" style="--delay: 0.3s">
+                    <input type="text" id="lastName" required>
+                    <label for="lastName">Last Name</label>
+                    <span class="focus-border"></span>
+                </div>
+                
+                <div class="input-group animate-input-appear" style="--delay: 0.4s">
+                    <input type="email" id="registerEmail" required>
+                    <label for="registerEmail">Email Address</label>
+                    <span class="focus-border"></span>
+                </div>
+                
+                <div class="input-group animate-input-appear" style="--delay: 0.5s">
+                    <input type="tel" id="phoneNumber" required>
+                    <label for="phoneNumber">Phone Number</label>
+                    <span class="focus-border"></span>
+                </div>
+                
+                <div class="input-group animate-input-appear" style="--delay: 0.6s">
+                    <input type="password" id="registerPassword" required>
+                    <label for="registerPassword">Password</label>
+                    <span class="focus-border"></span>
+                </div>
+                
+                <div class="input-group animate-input-appear" style="--delay: 0.7s">
+                    <input type="password" id="confirmPassword" required>
+                    <label for="confirmPassword">Confirm Password</label>
+                    <span class="focus-border"></span>
+                </div>
+                
+                <div class="form-options animate-input-appear" style="--delay: 0.8s">
+                    <label class="agree-terms">
+                        <input type="checkbox" id="agreeTerms" required>
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-login animate-input-appear" style="--delay: 0.9s">
+                    <span>Register</span>
+                    <svg class="arrow-icon" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
